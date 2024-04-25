@@ -9,8 +9,8 @@ async function fetchData(id: string) {
 export default async function ProductPage({
   params,
 }: {
-  params: { slug: string };
+  params: { id: string };
 }) {
-  const data = await fetchData(params.slug);
+  const data = await fetchData(params.id);
   return <main>{data?.name}</main>;
 }
