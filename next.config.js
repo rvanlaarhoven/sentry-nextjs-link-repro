@@ -3,6 +3,17 @@ const { withSentryConfig } = require("@sentry/nextjs");
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  webpack: (config, { webpack }) => {
+    config.plugins = config.plugins || [];
+    config.plugins.push(
+      // Enable treeshaking debug code; https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/tree-shaking/#tree-shaking-optional-code-with-nextjs
+      new webpack.DefinePlugin({
+        __SENTRY_DEBUG__: false,
+        __SENTRY_TRACING__: false,
+      })
+    );
+    return config;
+  },
 };
 
 module.exports = withSentryConfig(
