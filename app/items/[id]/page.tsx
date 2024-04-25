@@ -1,3 +1,6 @@
+export const runtime = "edge";
+export const revalidate = 43200;
+
 async function fetchData(id: string) {
   const response = await fetch(`https://api.tcgdex.net/v2/en/sets/${id}`);
   return response.json();
